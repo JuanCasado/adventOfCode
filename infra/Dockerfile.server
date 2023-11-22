@@ -1,0 +1,4 @@
+FROM advent-of-code:base
+
+RUN go build -o server server.go
+ENTRYPOINT [ "./server" ]

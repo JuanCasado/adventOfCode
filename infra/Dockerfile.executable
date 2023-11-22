@@ -1,0 +1,3 @@
+FROM advent-of-code:base
+
+ENTRYPOINT [ "./adventOfCode" ]

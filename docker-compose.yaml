@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  base:
+    image: advent-of-code:base
+    build:
+      context: .
+      dockerfile: ./infra/Dockerfile.base
+
+  executable:
+    image: advent-of-code:executable
+    build:
+      context: .
+      dockerfile: ./infra/Dockerfile.executable
+    env_file:
+      - .env
+    volumes:
+      - ./problems:/adventOfCode/problems
+  
+  scratch:
+    image: advent-of-code:scratch
+    build:
+      context: .
+      dockerfile: ./infra/Dockerfile.executable
+    env_file:
+      - .env
+  
+  interactive:
+    image: advent-of-code:debug
+    build:
+      context: .
+      dockerfile: ./infra/Dockerfile.interactive
+    env_file:
+      - .env
+    volumes:
+      - ./problems:/adventOfCode/problems
+
+  server:
+    image: advent-of-code:server
+    build:
+      context: .
+      dockerfile: ./infra/Dockerfile.server
+    env_file:
+      - .env
+    volumes:
+      - ./problems:/adventOfCode/problems
