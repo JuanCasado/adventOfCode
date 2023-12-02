@@ -1,0 +1,4 @@
+FROM docker:24.0.7-cli
+FROM rust:1.74.0
+
+COPY --from=docker /usr/local/bin/docker /usr/local/bin/

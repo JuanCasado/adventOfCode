@@ -2,3 +2,4 @@
 !infra
 !src
 !.env
+!docker-compose.yaml

@@ -1,46 +1,62 @@
 version: "3.8"
 
 services:
-  base:
-    image: advent-of-code:base
+  go:
+    image: advent-of-code:go
     build:
       context: .
-      dockerfile: ./infra/Dockerfile.base
+      dockerfile: ./infra/Dockerfile.go
 
-  executable:
-    image: advent-of-code:executable
+  rust:
+    image: advent-of-code:rust
     build:
       context: .
-      dockerfile: ./infra/Dockerfile.executable
-    env_file:
-      - .env
-    volumes:
-      - ./problems:/adventOfCode/problems
-  
-  scratch:
-    image: advent-of-code:scratch
-    build:
-      context: .
-      dockerfile: ./infra/Dockerfile.executable
-    env_file:
-      - .env
-  
-  interactive:
-    image: advent-of-code:debug
-    build:
-      context: .
-      dockerfile: ./infra/Dockerfile.interactive
-    env_file:
-      - .env
-    volumes:
-      - ./problems:/adventOfCode/problems
+      dockerfile: ./infra/Dockerfile.rust
 
-  server:
-    image: advent-of-code:server
+  run:
+    privileged: true
+    image: advent-of-code:run
     build:
       context: .
-      dockerfile: ./infra/Dockerfile.server
+      dockerfile: ./infra/Dockerfile.run
     env_file:
       - .env
     volumes:
-      - ./problems:/adventOfCode/problems
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./problems:/adventOfCode
+
+  run-clean:
+    privileged: true
+    image: advent-of-code:run
+    build:
+      context: .
+      dockerfile: ./infra/Dockerfile.run
+    env_file:
+      - .env
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  
+  dev:
+    privileged: true
+    image: advent-of-code:dev
+    build:
+      context: .
+      dockerfile: ./infra/Dockerfile.dev
+    env_file:
+      - .env
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - .:/adventOfCode
+
+  rust-dev:
+    privileged: true
+    image: advent-of-code:rust-dev
+    build:
+      context: .
+      dockerfile: ./infra/Dockerfile.rust-dev
+    env_file:
+      - .env
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - .:/adventOfCode
+

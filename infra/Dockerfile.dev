@@ -1,0 +1,4 @@
+FROM advent-of-code:go
+
+WORKDIR /adventOfCode
+ENTRYPOINT [ "/bin/bash" ]
