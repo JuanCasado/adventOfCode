@@ -1,5 +1,7 @@
 [workspace]
 
 members = [
-    "problems/2023/1/answers",
+    "problems/2023/1/answers/1",
+    "problems/2023/1/answers/2",
+    "problems/2023/1/answers/lib",
 ]
